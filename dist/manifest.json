@@ -1,25 +1,25 @@
 {
-    "manifest_version": 3,
+  "manifest_version": 3,
 
-    "name": "Chrome Extension (built with TypeScript + React)",
-    "description":
-        "A boilerplate project to quickly build a Chrome extension using TypeScript and React (built using webpack).",
-    "version": "1.0.0",
+  "name": "Chrome Extension (built with TypeScript + React)",
+  "description": "A boilerplate project to quickly build a Chrome extension using TypeScript and React (built using webpack).",
+  "version": "1.0.0",
 
-    "action": {
-        "default_icon": "icon16.png",
-        "default_popup": "popup.html"
-    },
+  "action": {
+    "default_icon": "icon16.png",
+    "default_popup": "popup.html"
+  },
 
-    "background": {
-        "service_worker": "js/eventPage.js",
-        "type": "module"
-    },
-    "icons": {
-        "16": "icon16.png",
-        "48": "icon48.png",
-        "128": "icon128.png"
-    },
+  "background": {
+    "service_worker": "js/eventPage.js",
+    "type": "module"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
 
-    "permissions": []
+  "permissions": ["tabs", "scripting"],
+  "host_permissions": ["https://app.slack.com/*"]
 }
