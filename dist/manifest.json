@@ -3,7 +3,7 @@
 
   "name": "Chrome Extension (built with TypeScript + React)",
   "description": "A boilerplate project to quickly build a Chrome extension using TypeScript and React (built using webpack).",
-  "version": "1.0.0",
+  "version": "1.0.1",
 
   "action": {
     "default_icon": "icon16.png",
@@ -19,7 +19,6 @@
     "48": "icon48.png",
     "128": "icon128.png"
   },
-
-  "permissions": ["tabs", "scripting"],
+  "permissions": ["tabs", "scripting", "webRequest"],
   "host_permissions": ["https://app.slack.com/*"]
 }
