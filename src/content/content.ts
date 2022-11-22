@@ -9,22 +9,51 @@ const updateNewMessageList = () => {
 // 未読ページか確認
 const re = /\/client\/.+?\/unreads.?/;
 if (re.test(location.pathname)) {
+  setUnreadParentObs();
+  setEmptyObs();
+}
 
+// 未読コンテナの存在確認をするオブザーバをセット
+function setEmptyObs() {
+  const unreadMainView = document.querySelector(
+    `.p-workspace__primary_view_body`
+  );
+  console.log(unreadMainView);
+  if (unreadMainView) {
+    // オブザーバーの作成
+    const emptyObs = new MutationObserver((mutationsList) => {
+      if (
+        (mutationsList[0].removedNodes[0] as HTMLElement).className.match(
+          /p-unreads_view__empty/
+        )
+      ) {
+        setUnreadParentObs();
+      }
+    });
+    emptyObs.observe(unreadMainView, {
+      childList: true,
+    });
+  }
+}
+
+// 未読コンテナの追加を監視するオブザーバをセット
+function setUnreadParentObs() {
+  console.log("start unreadparentobsa");
   // 未読コンテナが追加される親コンポーネントを取得
-  const unreadsView = document.querySelector(`#unreads_view > div [role=list]`);
+  const unreadParent = document.querySelector(
+    `#unreads_view > div [role=list]`
+  );
 
-  // オブザーバーの作成
-  const obs = new MutationObserver((mutationsList) => {
-    for (const mutation of mutationsList) {
-      // 追加された対象ノードに、イベントをバインドする
-      bindAutoReadEvent(mutation.addedNodes[0]);
-    }
-  });
-
-  if (unreadsView) {
-    console.log("target");
+  if (unreadParent) {
+    // オブザーバーの作成
+    const unreadParentObs = new MutationObserver((mutationsList) => {
+      for (const mutation of mutationsList) {
+        // 追加された対象ノードに、イベントをバインドする
+        bindAutoReadEvent(mutation.addedNodes[0]);
+      }
+    });
     // 監視を開始
-    obs.observe(unreadsView, {
+    unreadParentObs.observe(unreadParent, {
       childList: true,
     });
   }
