@@ -18,7 +18,6 @@ function setEmptyObs() {
   const unreadMainView = document.querySelector(
     `.p-workspace__primary_view_body`
   );
-  console.log(unreadMainView);
   if (unreadMainView) {
     // オブザーバーの作成
     const emptyObs = new MutationObserver((mutationsList) => {
@@ -56,19 +55,19 @@ function setUnreadParentObs() {
     unreadParentObs.observe(unreadParent, {
       childList: true,
     });
+    // TODO: どこかで監視を停止したほうがいい？
   }
 }
 
 function bindAutoReadEvent(targetNode) {
   if (!targetNode) return;
-  // console.log(addedNode.id);
-  // 処理
+
   else if (targetNode.id.indexOf("unreads_view_spacer-bottom-") === 0) {
     const unreadId = targetNode.id.split("-").slice(-1)[0];
-    // onceは一回だけ実行する時用です
     let observing = true;
 
     // スクロール時に非表示になったら既読ボタンクリック
+    // TODO: イベントリスナーを複数回追加するのをやめる
     document.addEventListener(
       "scroll",
       function () {
