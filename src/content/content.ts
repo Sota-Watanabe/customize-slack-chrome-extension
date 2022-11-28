@@ -15,21 +15,18 @@ if (re.test(location.pathname)) {
 
 // 未読コンテナの存在確認をするオブザーバをセット
 function setEmptyObs() {
-  const unreadMainView = document.querySelector(
-    `.p-workspace__primary_view_body`
-  );
-  if (unreadMainView) {
+  const MainView = document.querySelector(`.p-workspace__primary_view_body`);
+  if (MainView) {
     // オブザーバーの作成
     const emptyObs = new MutationObserver((mutationsList) => {
       if (
-        (mutationsList[0].removedNodes[0] as HTMLElement).className.match(
-          /p-unreads_view__empty/
-        )
+        (mutationsList[1].addedNodes[0] as HTMLElement).className ===
+        "p-unreads_view"
       ) {
         setUnreadParentObs();
       }
     });
-    emptyObs.observe(unreadMainView, {
+    emptyObs.observe(MainView, {
       childList: true,
     });
   }
@@ -37,13 +34,16 @@ function setEmptyObs() {
 
 // 未読コンテナの追加を監視するオブザーバをセット
 function setUnreadParentObs() {
-  console.log("start unreadparentobsa");
   // 未読コンテナが追加される親コンポーネントを取得
   const unreadParent = document.querySelector(
     `#unreads_view > div [role=list]`
   );
 
   if (unreadParent) {
+    // 未読コンテナにイベントをバインドする
+    bindAutoReadEvent(unreadParent)
+
+    // 未読コンテナ追加時にイベントをバインドする
     // オブザーバーの作成
     const unreadParentObs = new MutationObserver((mutationsList) => {
       for (const mutation of mutationsList) {
@@ -61,7 +61,6 @@ function setUnreadParentObs() {
 
 function bindAutoReadEvent(targetNode) {
   if (!targetNode) return;
-
   else if (targetNode.id.indexOf("unreads_view_spacer-bottom-") === 0) {
     const unreadId = targetNode.id.split("-").slice(-1)[0];
     let observing = true;
