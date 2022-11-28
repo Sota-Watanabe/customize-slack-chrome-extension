@@ -19,15 +19,25 @@ function setEmptyObs() {
   if (MainView) {
     // オブザーバーの作成
     const emptyObs = new MutationObserver((mutationsList) => {
+      // 新しいメッセージボタンの自動クリック
       if (
+        (mutationsList[0].previousSibling as unknown as HTMLElement).className ===
+          "p-unreads_view__empty__message" &&
+        (mutationsList[0].addedNodes[0] as unknown as HTMLElement).className ===
+          "c-button c-button--primary c-button--medium"
+      ) {
+        (mutationsList[0].addedNodes[0] as HTMLElement).click();
+      } else if (
         (mutationsList[1].addedNodes[0] as HTMLElement).className ===
         "p-unreads_view"
       ) {
         setUnreadParentObs();
+        // TODO: obs 停止？
       }
     });
     emptyObs.observe(MainView, {
       childList: true,
+      subtree: true,
     });
   }
 }
@@ -41,7 +51,10 @@ function setUnreadParentObs() {
 
   if (unreadParent) {
     // 未読コンテナにイベントをバインドする
-    bindAutoReadEvent(unreadParent)
+    for (const child of unreadParent.childNodes as unknown as HTMLElement[]) {
+      console.log(child);
+      bindAutoReadEvent(child);
+    }
 
     // 未読コンテナ追加時にイベントをバインドする
     // オブザーバーの作成
