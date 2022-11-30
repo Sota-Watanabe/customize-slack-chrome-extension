@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
 
-  "name": "Chrome Extension (built with TypeScript + React)",
+  "name": "customize-slack",
   "description": "A boilerplate project to quickly build a Chrome extension using TypeScript and React (built using webpack).",
   "version": "1.0.1",
 
