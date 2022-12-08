@@ -17,7 +17,6 @@ chrome.tabs.onUpdated.addListener(function (tabId, info, tab) {
     info.status === "complete" &&
     tab.url.indexOf("https://app.slack.com") !== -1
   ) {
-    console.log("tabsOnupdated");
     chrome.scripting.executeScript({
       target: { tabId: tab.id, allFrames: true },
       files: ["./js/content.js"],
