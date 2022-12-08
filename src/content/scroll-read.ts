@@ -1,11 +1,3 @@
-// TODO: 何処かでこれを実行
-const updateNewMessageList = () => {
-  const showBtn = document.querySelector(
-    `.p-unreads_view__empty--show_new > button`
-  ) as HTMLElement;
-  if (showBtn) showBtn.click();
-};
-
 // 未読ページか確認
 const re = /\/client\/.+?\/unreads.?/;
 if (re.test(location.pathname)) {
