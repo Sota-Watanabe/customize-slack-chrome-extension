@@ -19,6 +19,8 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "@emotion/babel-plugin": "^11.10.5",
+    "@emotion/babel-preset-css-prop": "^11.10.0",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.10.17",

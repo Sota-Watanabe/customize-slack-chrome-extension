@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Checkbox } from "@mui/material";
+import { Checkbox, css } from "@mui/material";
 import { ConfigOptions } from "../domains/models/popup";
-import { css } from "@emotion/react";
 
 type Props = {
   defaultConfig: ConfigOptions;
