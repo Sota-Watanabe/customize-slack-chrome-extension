@@ -1,11 +1,29 @@
-import React, { useEffect } from "react";
-import "./Popup.scss";
+import React, { useState } from "react";
+import { Checkbox } from "@mui/material";
+import { ConfigOptions } from "../domains/models/popup";
+import { css } from "@emotion/react";
 
-export default function Popup() {
-  useEffect(() => {
-    // Example of how to send a message to eventPage.ts.
-    chrome.runtime.sendMessage({ popupMounted: true });
-  }, []);
+type Props = {
+  defaultConfig: ConfigOptions;
+};
 
-  return <div className="popupContainer">Hello, world!</div>;
-}
+const Popup: React.VFC<Props> = ({ defaultConfig }) => {
+  const [settingOptions, setSettingOptions] = useState(defaultConfig);
+  chrome.storage.local.set({ scrollAutoRead: true });
+  // const label = { inputProps: { "aria-label": "Checkbox demo" } };
+  return (
+    <>
+      各種設定
+      <div
+        css={css`
+          display: flex;
+        `}
+      >
+        <Checkbox defaultChecked />
+        <label>スクロール自動既読</label>
+      </div>
+    </>
+  );
+};
+
+export default Popup;

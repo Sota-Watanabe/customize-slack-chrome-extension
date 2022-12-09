@@ -19,6 +19,6 @@
     "48": "icon48.png",
     "128": "icon128.png"
   },
-  "permissions": ["tabs", "scripting", "webRequest"],
+  "permissions": ["tabs", "scripting", "webRequest", "storage"],
   "host_permissions": ["https://app.slack.com/*"]
 }
