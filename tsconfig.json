@@ -11,7 +11,5 @@
     "rootDir": "src",
     "sourceMap": true,
     "target": "es5",
-    
-    // "types": ["@emotion/react/types/css-prop"],
   }
 }
