@@ -29,5 +29,5 @@ chrome.webRequest.onCompleted.addListener(
 
 // インストール時にstorageを初期化
 chrome.runtime.onInstalled.addListener(({}) => {
-  chrome.storage.local.set({ scrollAutoRead: true });
+  chrome.storage.local.set({ config: { scrollAutoRead: true } });
 });
