@@ -23,10 +23,7 @@ const Popup: React.VFC<Props> = ({ defaultConfig }) => {
   };
 
   const saveConfig = () => {
-    for (const key in updatedConfig) {
-      console.log(key, updatedConfig[key]);
-      chrome.storage.local.set({ [key]: updatedConfig[key] });
-    }
+    chrome.storage.local.set({ config: updatedConfig });
     window.close();
   };
 
